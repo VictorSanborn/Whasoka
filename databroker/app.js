@@ -1,35 +1,40 @@
+require('dotenv').config({ path: '.env' })
 var app = require('express')()
 var http = require('http').createServer(app)
 var io = require('socket.io')(http)
 
 //TODO - ADD CONFICURATION JSON FILE
-const port = 4000
-const myKey = '97fawdfpo2122'
+const port = process.env.SOCKET_IO_PORT
+const myKey = process.env.MY_KEY
 
-//
-// Data Structure
-//
-/*
-    {
-        me: [id], //Id of sender
-        myKey: [guid], //Key allowing messages to be processed
-        target: [id], //target application
-        value: [json] //any stucture needed for the app
-    }
-*/
+let idArray = []
 
 io.on('connection', function(socket) {
-  socket.on('message', msg => {
-    if (correctAuth(msg.myKey)) handleData(msg)
+  socket.emit('id', socket.id)
+
+  socket.on('value', msg => {
+    console.log(socket.id)
+    if (correctAuth(msg.myKey)) handleValue(msg)
     else console.log(`incorrect auth:`, msg) //TODO - ADD TO LOGGING!
+  })
+
+  socket.on('settings', msg => {
+    if (correctAuth(msg.myKey)) handleSettings(msg)
   })
 })
 
 const correctAuth = key => {
   return myKey === key
 }
-const handleData = data => {
+
+const handleValue = data => {
   console.log(data)
+  //TO BE IMPLEMENTED
+}
+
+const handleSettings = data => {
+  let targetId = JSON.parse(data.value).socketID
+  io.to(targetId).emit('settings', data)
   //TO BE IMPLEMENTED
 }
 
