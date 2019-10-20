@@ -1,5 +1,4 @@
 var DataSender = require('../models/DataSender')
-require('dotenv').config({ path: '../.env' })
 var socket = require('socket.io-client')(process.env.SOCKET_IO_ADRESS)
 
 let dataSender
