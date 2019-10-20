@@ -22,6 +22,8 @@ The possibilities is endless!
 
 ![alt text](./Readme_Assets/data_diagram.png)
 
+As shown in the above picture, the "Data Senders" is module examples and some upcoming sections of work. Also the "Data Management / Display" Is currently not built.
+
 ## Data Structure
 
 ![alt text](./Readme_Assets/divider.png)
