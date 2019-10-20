@@ -1,8 +1,10 @@
-# Whasoka
+![alt text](./Readme_Assets/header.png)
 
 -- Well, a Home Automation System that is Open Source... Okay! --
 
 ## Info
+
+![alt text](./Readme_Assets/divider.png)
 
 An OpenSource project that allows you to combine applications and/or add your own apps to be used.
 The system can be used both as an cloesd enviroment only accessable from your home network or as an open enviromet where you can controll your home from anywhere.
@@ -12,6 +14,8 @@ To be used as an open system you need to host the database and GraphQL-API on a 
 ![alt text](./Readme_Assets/data_diagram.png)
 
 ## Data Structure
+
+![alt text](./Readme_Assets/divider.png)
 
 ### Message within Databroaker
 
