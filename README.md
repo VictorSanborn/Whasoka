@@ -9,6 +9,8 @@ The system can be used both as an cloesd enviroment only accessable from your ho
 
 To be used as an open system you need to host the database and GraphQL-API on a server accassable from the internet.
 
+![alt text](./Readme_Assets/data_diagram.png)
+
 ## Data Structure
 
 ### Message within Databroaker
