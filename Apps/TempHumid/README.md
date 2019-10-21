@@ -25,4 +25,4 @@
 
     sudo pip3 install Adafruit_DHT
     sudo pip3 install python-socketio
-    sudo pip3 install environs
+    sudo pip3 install python-dotenv

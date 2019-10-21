@@ -3,14 +3,9 @@ import sys
 #import Adafruit_DHT as dht
 import threading
 import socketio
-import environ
+from dotenv import load_dotenv
+load_dotenv()
 
-path = environ.Path(__file__) - 2
-env = environ.Env()
-environ.Env.read_env(path('.env'))
-
-env = Env()
-env.read_env()  # read .env file, if it exists, Else read main README.md File!
 sio = socketio.Client()
 
 
@@ -38,6 +33,6 @@ def printit():
     my_message('hej')
 
 
-sio.connect(env("SOCKET_IO_ADRESS"))
+sio.connect(os.getenv("SOCKET_IO_ADRESS"))
 sio.wait()
 printit()
