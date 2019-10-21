@@ -18,9 +18,9 @@ def connect():
 
 @sio.event
 def my_message(data):
-    print('message received with ', data)
+    print('message received with ')
     sio.emit(
-        'value', {'response': '{room: \'livingroom\', temp: \'19.2\', humid: \'22\'}'})
+            'value', '{"me":"test", "myKey": "","myId": "", target: ""}')
 
 
 @sio.event
@@ -32,9 +32,9 @@ def printit():
     threading.Timer(5.0, printit).start()
    # humidity, temperature = dht.read_retry(11, 4)
     #my_message('Temp: {0:0.1f} C  Humidity: {1:0.1f} %'.format(temperature, humidity))
-    my_message(os.getenv("SOCKET_IO_ADRESS"))
+    my_message('Hi from rpi!')
 
-
-sio.connect('localhost:4001')
-sio.wait()
 printit()
+sio.connect('http://192.168.1.101:4001')
+sio.wait()
+
