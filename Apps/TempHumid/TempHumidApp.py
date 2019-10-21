@@ -3,7 +3,11 @@ import sys
 #import Adafruit_DHT as dht
 import threading
 import socketio
-from environs import Env
+import environ
+
+path = environ.Path(__file__) - 2
+env = environ.Env()
+environ.Env.read_env(path('.env'))
 
 env = Env()
 env.read_env()  # read .env file, if it exists, Else read main README.md File!

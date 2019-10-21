@@ -13,7 +13,9 @@
 
 #### Lazy style (one line to run it all!) <3
 
-    run: install.sh
+    run:
+    chmod +x install.sh
+    ./install.sh
 
 #### Manualy
 
