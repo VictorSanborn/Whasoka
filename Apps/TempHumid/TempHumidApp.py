@@ -1,10 +1,12 @@
 #!/usr/bin/python
+import os
 import sys
 #import Adafruit_DHT as dht
 import threading
 import socketio
 from dotenv import load_dotenv
 load_dotenv()
+
 
 sio = socketio.Client()
 
