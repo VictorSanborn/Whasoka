@@ -1,7 +1,7 @@
 sudo apt-get update
-sudo apt-get install python-pip
-sudo python -m pip install --upgrade pip setuptools wheel
+sudo apt-get install python3-pip
+sudo python3 -m pip install --upgrade pip setuptools wheel
 
-sudo pip install Adafruit_DHT
-sudo pip install python-socketio
-sudo pip install environs
+sudo pip3 install Adafruit_DHT
+sudo pip3 install python-socketio
+sudo pip3 install environs
