@@ -9,6 +9,12 @@
     git clone https://github.com/VictorSanborn/Whasoka.git
     cd Whasoka/Apps/TempHumid
 
+    .env file:
+    SOCKET_IO_ADRESS=http://192.168.1.101:4001 (example of local ip of databroker (socketIO server))
+    MY_KEY=sUpErS4f3_No0t
+    MY_NAME=BedRoomTemp
+    TARGET_APP=TempHumidApp
+
 ### Python 3:
 
 #### Lazy style (one line to run it all!) <3
