@@ -14,7 +14,8 @@ io.on('connection', function(socket) {
 
   socket.on('value', msg => {
     console.log(socket.id)
-    if (correctAuth(msg.myKey)) handleValue(msg)
+
+    if (correctAuth(JSON.parse(msg).myKey)) handleValue(JSON.parse(msg))
     else console.log(`incorrect auth:`, msg) //TODO - ADD TO LOGGING!
   })
 
@@ -24,7 +25,7 @@ io.on('connection', function(socket) {
 })
 
 const correctAuth = key => {
-  return myKey === key
+  return myKey == key
 }
 
 const handleValue = data => {

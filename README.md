@@ -28,7 +28,7 @@ As shown in the above picture, the "Data Senders" is module examples and some up
 
 ![alt text](./Readme_Assets/divider.png)
 
-### Message within Databroaker
+### Message within Databroker
 
     [JSON]
     {
@@ -43,3 +43,33 @@ As shown in the above picture, the "Data Senders" is module examples and some up
     myId: is set by data broker when the unit connects
     myKey: password set in data broker. gives some kind of security...
     target: name of the target application. Ex TempMessurmentApp, is used to save data to DB
+
+### .env File (Required)
+
+    Create a .env file in the bellow listed folders with the following values (or change them to your liking)
+
+#### Databroker
+
+    SOCKET_IO_PORT=4001
+    SOCKET_IO_ADRESS=http://localhost:4001
+    MY_KEY=sUpErS4f3_No0t
+
+    //USED FOR TEST NOT NEEDED
+    MY_NAME=BedRoomTemp
+    TARGET_APP=TempHumidApp
+
+#### GraphQL_API
+
+    USER=doadmin
+    PASSWORD=PASSWORD_FROM_DIGITALOCEAN
+    HOST=IM_USING_DIGITALOCEAN_GET_YOUR_POSTGRESDB_THERE_TO_IF_YOU_WHANT!
+    PORT=25060
+    DATABASE=WHASOKA
+
+#### Apps/TempHumid
+
+    SOCKET_IO_PORT=4001
+    SOCKET_IO_ADRESS=http://localhost:4001
+    MY_KEY=sUpErS4f3_No0t
+    MY_NAME=BedRoomTemp
+    TARGET_APP=SimpleTempApp
