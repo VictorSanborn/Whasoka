@@ -16,19 +16,23 @@ myId = "" #Recived from socketIO databroker
 @sio.event
 def connect():
     print('connection established')
+    isCon = True
 
 @sio.event
 def disconnect():
     print('disconnected from server')
+    isCon = False
 
 #Recived from databroker when the server SocketIO detects the units ID
 @sio.event
 def id(data):
+    print("ID: "+data)
     myId = data
 
 #Recived from databroker when a update of time is sent to this client ID (myId)
 @sio.event
 def updateTimer(data):
+    print("Update Timer: "+data)
     sendTimer = data 
 
 #Base message to be able to speak to databroker. (should be untoutched if you are not sure what is happening)
@@ -46,15 +50,15 @@ def printit():
     #       THIS IS AN EXAMPLE APP, REPLACE DATA WITHIN WHILE LOOP TO WRITE YOUR OWN! :) 
     #
     while True:
-        time.sleep(sendTimer/1000)
-        humidity, temperature = dht.read_retry(11, 4)
-        room = "livingroom"
+            time.sleep(sendTimer/1000)
+            humidity, temperature = dht.read_retry(11, 4)
+            room = "livingroom"
 
-        #Data is the value stored in the db. Each key needs to match teh db column name!
-        data = '{"room": "'+room+'", "temp": "'+str(temperature)+'", "humid": "'+str(humidity)+'"}'
-        my_message(data)
+            #Data is the value stored in the db. Each key needs to match teh db column name!
+            data = '{"room": "'+room+'", "temp": "'+str(temperature)+'", "humid": "'+str(humidity)+'"}'
+            my_message(data)
 
-#        
+
 #Basic init of app
 #
 
