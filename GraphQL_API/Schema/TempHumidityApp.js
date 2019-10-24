@@ -1,12 +1,7 @@
 const { gql } = require('apollo-server')
 var moment = require('moment')
 const { Pool } = require('pg')
-const result = require('dotenv').config({ path: '../.env' })
-
-//Check if .env is loaded
-if (result.error) {
-  throw result.error
-}
+require('dotenv').config({ path: '../.env' })
 
 const pool = new Pool({
   user: process.env.USER,
