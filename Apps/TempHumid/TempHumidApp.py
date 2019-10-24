@@ -17,21 +17,25 @@ myId = ""  # Recived from socketIO databroker
 @sio.event
 def connect():
     print('connection established')
+    isCon = True
 
 
 @sio.event
 def disconnect():
     print('disconnected from server')
+    isCon = False
 
 # Recived from databroker when the server SocketIO detects the units ID
 @sio.event
 def id(data):
+    print("ID: "+data)
     myId = data
 
 # Recived from databroker when a update of time is sent to this client ID (myId)
 @sio.event
 def updateTimer(data):
-    sendTimer = data
+    print("Update Timer: "+data)
+    sendTimer = data 
 
 # Base message to be able to speak to databroker. (should be untoutched if you are not sure what is happening)
 @sio.event
@@ -47,17 +51,16 @@ def printit():
     #
     while True:
         time.sleep(sendTimer/1000)
-
-        # Using library to read temp and humidity from DHT11 unit
         humidity, temperature = dht.read_retry(11, 4)
         room = "livingroom"
 
-        # values within data keys value is the values stored in the db. Each key needs to match teh db column name!
-        data = '{"room": "'+room+'", "temp": "' + \
-            str(temperature)+'", "humid": "'+str(humidity)+'"}'
+         #Data is the value stored in the db. Each key needs to match teh db column name!
+        data = '{"room": "'+room+'", "temp": "'+str(temperature)+'", "humid": "'+str(humidity)+'"}'
         my_message(data)
 
-#
+
+
+
 # Basic init of app
 #
 
