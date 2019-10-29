@@ -11,8 +11,8 @@ load_dotenv()
 
 sio = socketio.Client()
 sendTimer = 5000  # Milisecounds
+global myId 
 myId = ""  # Recived from socketIO databroker
-
 
 @sio.event
 def connect():
@@ -33,8 +33,8 @@ def id(data):
 
 # Recived from databroker when a update of time is sent to this client ID (myId)
 @sio.event
-def updateTimer(data):
-    print("Update Timer: "+data)
+def timesettings(data):
+    print("Update Timer: "+str(data))
     sendTimer = data 
 
 # Base message to be able to speak to databroker. (should be untoutched if you are not sure what is happening)
@@ -50,11 +50,14 @@ def printit():
     #       THIS IS AN EXAMPLE APP, REPLACE CODE WITHIN WHILE LOOP TO WRITE YOUR OWN! :)
     #
     while True:
+        global sendTimer
+        print(sendTimer)
         time.sleep(sendTimer/1000)
         humidity, temperature = dht.read_retry(11, 4)
         room = "livingroom"
-
-         #Data is the value stored in the db. Each key needs to match teh db column name!
+        
+        print(temperature)
+        #Data is the value stored in the db. Each key needs to match teh db column name!
         data = '{"room": "'+room+'", "temp": "'+str(temperature)+'", "humid": "'+str(humidity)+'"}'
         my_message(data)
 
@@ -68,4 +71,5 @@ def printit():
 # Connect to databroaker socket io server
 sio.connect(str(os.getenv("SOCKET_IO_ADRESS")))
 # Run app
+print("STARTING --")
 printit()
