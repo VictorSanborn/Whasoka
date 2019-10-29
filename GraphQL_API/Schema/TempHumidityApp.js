@@ -23,6 +23,7 @@ const types = `
 
 const queries = `
   TempHumidApp_Query(amount: Int!): [tempHumidApp]
+  TempHumidApp_LatestForEachRoom_Query: [tempHumidApp]
 `
 
 const mutations = `
@@ -31,8 +32,38 @@ const mutations = `
 
 const queryResolvers = {
   TempHumidApp_Query: async (root, args) => {
-    let text = `SELECT * FROM public."TempHumidApp"`
-    return QueryDB(text)
+    let temps = []
+    let rooms = await QueryDB(
+      `SELECT DISTINCT room FROM public."TempHumidApp";`
+    )
+    console.log(rooms)
+    for (let i = 0; i < rooms.length; i++) {
+      let dbres = await QueryDB(
+        `SELECT * FROM public."TempHumidApp" WHERE room = '${rooms[i].room}' ORDER BY date DESC LIMIT ${args.amount};`
+      )
+      console.log(dbres)
+      dbres.forEach(t => temps.push(t))
+    }
+
+    console.log(temps)
+    return temps
+  },
+
+  TempHumidApp_LatestForEachRoom_Query: async (root, args) => {
+    let temps = []
+    let rooms = await QueryDB(
+      `SELECT DISTINCT room FROM public."TempHumidApp";`
+    )
+    console.log(rooms)
+    for (let i = 0; i < rooms.length; i++) {
+      let dbres = await QueryDB(
+        `SELECT * FROM public."TempHumidApp" WHERE room = '${rooms[i].room}' ORDER BY date DESC LIMIT 1;`
+      )
+      temps.push(dbres[0])
+    }
+
+    console.log(temps)
+    return temps
   }
 }
 

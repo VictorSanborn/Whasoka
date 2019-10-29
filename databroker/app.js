@@ -15,6 +15,7 @@ const axiosGraphQL = axios.create({
 let idArray = []
 
 io.on('connection', function(socket) {
+  console.log(socket.id)
   socket.emit('id', socket.id)
 
   socket.on('value', msg => {
@@ -25,8 +26,8 @@ io.on('connection', function(socket) {
     else console.log(`incorrect auth:`, msg) //TODO - ADD TO LOGGING!
   })
 
-  socket.on('settings', msg => {
-    if (correctAuth(msg.myKey)) handleSettings(msg)
+  socket.on('timesettings', msg => {
+    if (correctAuth(msg.myKey)) handleTimeSettings(msg)
   })
 })
 
@@ -44,10 +45,11 @@ const handleValue = async (target, data) => {
   })
 }
 
-const handleSettings = data => {
+const handleTimeSettings = data => {
   //Send data to correct unit based on socket ID
   let targetId = JSON.parse(data.value).socketID
-  io.to(targetId).emit('settings', data)
+  io.to(targetId).emit('timesettings', JSON.parse(data.value).sendInterval)
+  console.log(JSON.parse(data.value).sendInterval)
 }
 
 const GraphQLQuery = (target, data) => {
