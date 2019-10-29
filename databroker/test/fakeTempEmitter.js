@@ -1,6 +1,7 @@
 var DataSender = require('../models/DataSender')
+require('dotenv').config({ path: '../.env' })
+console.log(process.env.SOCKET_IO_ADRESS)
 var socket = require('socket.io-client')(process.env.SOCKET_IO_ADRESS)
-
 let dataSender
 let myName = process.env.MY_NAME
 let appName = process.env.TARGET_APP
@@ -15,7 +16,7 @@ const emitter = async (type, value) => {
 }
 
 let interval = setInterval(function() {
-  emitter('value', "{room: 'livingroom', temp: '19.2C', humid: '22%'}")
+  emitter('value', "{room: 'livingroom', temp: '19.2', humid: '22'}")
 }, sendInterval)
 
 //clearTimeout(timeOutObj)
@@ -35,7 +36,7 @@ socket.on('settings', msg => {
   let settings = JSON.parse(msg.value)
   clearInterval(interval)
   interval = setInterval(function() {
-    emitter('value', `{room: 'livingroom', temp: '19.2C', humid: '${i++}%'}`)
+    emitter('value', `{room: 'livingroom', temp: '19.2', humid: '${i++}'}`)
   }, settings.sendInterval)
 
   console.log(settings.sendInterval)
