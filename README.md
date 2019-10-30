@@ -44,6 +44,25 @@ As shown in the above picture, the "Data Senders" is module examples and some up
     myKey: password set in data broker. gives some kind of security...
     target: name of the target application. Ex TempMessurmentApp, is used to save data to DB
 
+### Docker suport!
+
+    The projects can be hosted with docker for your simplicity. Simply use the bash files within the /scripts folder within each project. Run the dockerBuild.sh with the project loaded to your machine (ex. RPi). Then run the script runDoocker.sh to start it.
+
+    To see if it runs use:
+        (sudo) docker ps
+    and all running containers will be shown.
+
+    Note that teh build- / runDocker.sh might need to be made exicutable. To do this run the command:
+        chmod +x buildDocker.sh
+        chmod +x runDocker.sh
+
+    To kill a running container use:
+        (sudo) docker ps
+    note the three firs values in the CONTAINER ID you want to kill
+    then run:
+        (sudo) docker kill xxx
+    where xxx is the first three in CONTAINER ID
+
 ### .env File (Required)
 
     Create a .env file in the bellow listed folders with the following values (or change them to your liking)
@@ -59,6 +78,8 @@ As shown in the above picture, the "Data Senders" is module examples and some up
     TARGET_APP=TempHumidApp
 
 #### GraphQL_API
+
+    OBS! The runDocker.sh file needs to be updated with the correct --env variabels before being used.
 
     USER=doadmin
     PASSWORD=PASSWORD_FROM_DIGITALOCEAN
