@@ -12,7 +12,6 @@ load_dotenv()
 
 sio = socketio.Client()
 sendTimer = 5000  # Milisecounds
-global myId 
 myId = ""  # Recived from socketIO databroker
 
 @sio.event
@@ -30,6 +29,7 @@ def disconnect():
 @sio.event
 def id(data):
     print("ID: "+data)
+    global myId
     myId = data
 
 # Recived from databroker when a update of time is sent to this client ID (myId)
