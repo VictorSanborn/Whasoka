@@ -44,7 +44,7 @@ As shown in the above picture, the "Data Senders" is module examples and some up
     myKey: password set in data broker. gives some kind of security...
     target: name of the target application. Ex TempMessurmentApp, is used to save data to DB
 
-### Docker suport!
+### Docker support!
 
     The projects can be hosted with docker for your simplicity. Simply use the bash files within the /scripts folder within each project. Run the dockerBuild.sh with the project loaded to your machine (ex. RPi). Then run the script runDoocker.sh to start it.
 
