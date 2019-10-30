@@ -15,15 +15,20 @@ const axiosGraphQL = axios.create({
 let idArray = []
 
 io.on('connection', function(socket) {
-  console.log(socket.id)
-  socket.emit('id', socket.id)
+  //On connection resend unit id to the specific unit (handshake;is)
+  console.log(`Connection -- unit id: ${socket.id}`)
+  io.to(socket.id).emit('id', socket.id)
 
   socket.on('value', msg => {
     console.log(socket.id)
 
-    if (correctAuth(JSON.parse(msg).myKey))
+    if (correctAuth(JSON.parse(msg).myKey)) {
+      //Store value
       handleValue(JSON.parse(msg).target, JSON.parse(msg).value)
-    else console.log(`incorrect auth:`, msg) //TODO - ADD TO LOGGING!
+      //Brodcast value to all apps connected to the server
+      //Then the apps can sort what they are interested of
+      socket.emit('event', msg)
+    } else console.log(`incorrect auth:`, msg) //TODO - ADD TO LOGGING!
   })
 
   socket.on('settings', msg => {
@@ -38,8 +43,6 @@ const correctAuth = key => {
 const handleValue = async (target, data) => {
   console.log(target, data)
   //send data to GraphQL to be stored in DB
-
-  //  console.log(GraphQLQuery(target, data))
   axiosGraphQL.post('http://localhost:9001/', {
     query: GraphQLQuery(target, data)
   })
