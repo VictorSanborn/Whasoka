@@ -52,6 +52,7 @@ As shown in the above picture, the "Data Senders" is module examples and some up
 
     SOCKET_IO_PORT=4001
     SOCKET_IO_ADRESS=http://localhost:4001
+    GRAPHQL_ADRESS=http://localhost:9001
     MY_KEY=sUpErS4f3_No0t
 
     //USED FOR TEST NOT NEEDED

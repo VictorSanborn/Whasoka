@@ -9,7 +9,7 @@ const port = process.env.SOCKET_IO_PORT
 const myKey = process.env.MY_KEY
 
 const axiosGraphQL = axios.create({
-  baseURL: 'http://localhost:9001/'
+  baseURL: process.env.GRAPHQL_ADRESS
 })
 
 let idArray = []
@@ -43,7 +43,7 @@ const correctAuth = key => {
 const handleValue = async (target, data) => {
   console.log(target, data)
   //send data to GraphQL to be stored in DB
-  axiosGraphQL.post('http://localhost:9001/', {
+  axiosGraphQL.post('', {
     query: GraphQLQuery(target, data)
   })
 }
