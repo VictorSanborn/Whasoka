@@ -9,7 +9,7 @@
   "author": "Victor Sanborn",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^2.9.6",
+    "apollo-server": "^2.14.2",
     "dotenv": "^8.2.0",
     "moment": "^2.24.0",
     "pg": "^7.12.1"
